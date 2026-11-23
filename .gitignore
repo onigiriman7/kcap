@@ -1,0 +1,10 @@
+runs/*
+!runs/.gitkeep
+sealed/
+config/prereg.yaml.bak
+__pycache__/
+*.egg-info/
+.pytest_cache/
+config/prereg.yaml
+*.docx
+.venv/

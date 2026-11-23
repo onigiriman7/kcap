@@ -1,0 +1,8 @@
+[
+  {"input": "SCENARIO: A CX15 condenser fan motor failed; the new motor is installed and the old capacitor tests in spec.\n\nREFERENCE: Replace the run capacitor too at no charge, because 2014-16 batch capacitors fail soon after a new motor; not needed on CX17+.\n\nCANDIDATE: Since the capacitor tests fine, leave it and close the job.",
+   "output": {"score": 0, "justification": "Misses the key practice and would cause a callback."}},
+  {"input": "SCENARIO: A CX15 condenser fan motor failed; the new motor is installed and the old capacitor tests in spec.\n\nREFERENCE: Replace the run capacitor too at no charge, because 2014-16 batch capacitors fail soon after a new motor; not needed on CX17+.\n\nCANDIDATE: Swap the capacitor as well, older units tend to have weak ones.",
+   "output": {"score": 1, "justification": "Right action but no charge/serial-range condition and vague reason."}},
+  {"input": "SCENARIO: A CX15 condenser fan motor failed; the new motor is installed and the old capacitor tests in spec.\n\nREFERENCE: Replace the run capacitor too at no charge, because 2014-16 batch capacitors fail soon after a new motor; not needed on CX17+.\n\nCANDIDATE: Replace the capacitor free of charge - CX14-16 caps from that batch die within weeks of a new motor. Newer serials don't need it.",
+   "output": {"score": 2, "justification": "Matches action, reason and scope."}}
+]

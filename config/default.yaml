@@ -1,0 +1,96 @@
+# Edit the model names to the ones you have access to.
+# Rule 4: persona + judge should be a different model family than interviewer.
+providers:
+  copilot:                # GitHub Copilot SDK; auth = `gh auth login` / GH_TOKEN. `kcap models` lists ids.
+    mode: empty           # bare chat sessions: no agent tools, skills or memory
+    timeout: 300
+  openai:
+    api_key_env: OPENAI_API_KEY
+    base_url: https://api.openai.com/v1
+  azure:
+    api_key_env: AZURE_OPENAI_API_KEY
+    endpoint_env: AZURE_OPENAI_ENDPOINT
+    api_version: "2024-10-21"
+  anthropic:
+    api_key_env: ANTHROPIC_API_KEY
+    base_url: https://api.anthropic.com/v1
+
+roles:
+  interviewer: {provider: copilot, model: gpt-6.1-sol, temperature: 0.7, max_tokens: 1500}
+  simulator:   {provider: copilot, model: gpt-6-luna, temperature: 0.8, max_tokens: 800}
+  generator:   {provider: copilot, model: claude-sonnet-5.5, temperature: 0.9, max_tokens: 8000}
+  persona:     {provider: copilot, model: claude-sonnet-5.5, temperature: 0.7, max_tokens: 1000}
+  judge:       {provider: copilot, model: claude-sonnet-5.5, temperature: 0.3, max_tokens: 1500}
+  apprentice:  {provider: copilot, model: gpt-6.1-sol, temperature: 0.2, max_tokens: 800}
+# Copilot ignores temperature/max_tokens. To use direct APIs instead, set provider: openai|anthropic|azure.
+
+# USD per million tokens (input, output). Update to current prices.
+pricing:
+  gpt-4.1: [2.0, 8.0]
+  gpt-4.1-mini: [0.4, 1.6]
+  claude-sonnet-4-5: [3.0, 15.0]
+
+budget:
+  max_usd: 100.0          # hard cap per process; client raises before exceeding
+  max_calls: 20000        # uncached model calls per process (Copilot bills per request)
+
+seed: 0
+
+retrieval:
+  embeddings: false       # true requires `pip install sentence-transformers`
+  embedding_model: all-MiniLM-L6-v2
+  bm25_weight: 0.5
+
+exp1:
+  domains:
+    - injection-molding line at a mid-size auto parts maker
+    - hospital pharmacy dispensing
+    - regional bank small-business loan underwriting
+    - data-center on-call operations
+    - regional HVAC field service
+  n_seeds: 5
+  n_rules: 25
+  min_scope_exception_rules: 5
+  n_docs: 200
+  noise_frac: 0.35
+  n_contradictions: 4
+  n_scenarios: 20
+  min_scope_scenarios: 5
+  leak_max_attempts: 3
+  n_questions: 40
+  budget_curve: [10, 20, 40, 60]
+  strategies: [A, B, C, D]
+
+gap_miner:
+  top_k: 40
+  generations_per_cluster: 4
+  num_reflections: 3
+  dedup_threshold: 0.6          # cosine, used when retrieval.embeddings is true
+  dedup_threshold_lexical: 0.4  # token Jaccard, used otherwise
+  min_cluster_size: 3
+
+persona:
+  misremember_prob: 0.10
+  volunteer_prob: 0.10     # chance a generic question surfaces one action (pilot: A was stuck at 0)
+
+strategy_c:
+  followups_per_card: 2
+
+strategy_d:
+  search_steps: 16
+  weights: {novelty: 0.5, specificity: 0.3, priority: 0.2}
+
+judge:
+  ensemble: 3
+  num_reflections: 1
+
+exp2:
+  repo: pydata/xarray      # chosen: ~70% substantive human review comments, separate doc/ tree
+  max_review_pages: 30     # x100 comments; maintainer conventions are only ~2-3% of comments
+  sample_to_verify: 40
+  min_verified_rules: 20
+
+exp3:
+  session_minutes: 20     # owner answering time per arm (B, C, D)
+  d_search_steps: 4       # live sessions: ~3 LLM calls/step at 7-25 s each; 16 steps took ~10 min/question
+  n_scenarios: 20

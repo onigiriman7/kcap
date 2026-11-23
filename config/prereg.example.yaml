@@ -1,0 +1,20 @@
+# Copy to prereg.yaml, set YOUR numbers, then `git add config/prereg.yaml && git commit`.
+# `kcap exp1 run` refuses a full run until prereg.yaml is committed and unmodified.
+exp1:
+  n_questions: 40
+  pass:
+    rule_recall_D_minus_A_min: 0.20
+    rule_recall_D_minus_C_ci_excludes_zero: true
+    contradiction_catch_rate_min: 0.70
+exp2:
+  pass:
+    gap_card_precision_min: 0.50
+exp3:
+  sealed_scenarios_sha256: ""
+  pass:
+    apprentice_gain_D_vs_A_min: 0.25
+    surprise_units_min: 3
+    burden_max: 3
+judge:
+  agreement_min: 0.85
+  kappa_min: 0.70

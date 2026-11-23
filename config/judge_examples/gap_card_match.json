@@ -1,0 +1,6 @@
+[
+  {"input": "HYPOTHESIS: Older Corvane CX units get a free capacitor swap whenever the fan motor is replaced.\n\nRULES:\nR01: when Replacing a failed condenser fan motor on a Corvane CX unit -> Also replaces the run capacitor at no charge (scope: only CX14-16)\nR02: when Quoting Pellham schools -> adds escort allowance (scope: not bus garage)",
+   "output": {"rule_id": "R01", "justification": "Same situation and action."}},
+  {"input": "HYPOTHESIS: Technicians prefer morning appointments for rooftop units.\n\nRULES:\nR01: when Replacing a failed condenser fan motor on a Corvane CX unit -> Also replaces the run capacitor at no charge (scope: only CX14-16)\nR02: when Quoting Pellham schools -> adds escort allowance (scope: not bus garage)",
+   "output": {"rule_id": null, "justification": "No rule concerns appointment timing for rooftop units."}}
+]

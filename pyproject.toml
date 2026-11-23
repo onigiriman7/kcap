@@ -1,0 +1,32 @@
+[project]
+name = "kcap"
+version = "0.1.0"
+requires-python = ">=3.11"
+dependencies = [
+  "pydantic>=2",
+  "typer",
+  "pyyaml",
+  "numpy",
+  "scipy",
+  "rank_bm25",
+  "treequest",
+  "matplotlib",
+  "truststore",
+]
+
+[project.optional-dependencies]
+embeddings = ["sentence-transformers"]
+dev = ["pytest"]
+
+[project.scripts]
+kcap = "kcap.cli:app"
+
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+include = ["kcap*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

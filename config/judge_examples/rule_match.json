@@ -1,0 +1,6 @@
+[
+  {"input": "HIDDEN RULE R01\n  situation: Replacing a failed condenser fan motor on a Corvane CX unit.\n  action: Also replaces the run capacitor at no charge even if in spec.\n  reason: 2014-16 batch capacitors degrade fast with a new motor.\n  scope: Only serials CX14-CX16.\n\nKNOWLEDGE UNITS:\nKU003: WHEN replacing a CX fan motor THEN swap the run capacitor free. WHY: old batch caps fail within ~60 days. SCOPE: -",
+   "output": {"action": {"verdict": "captured", "ku_id": "KU003"}, "reason": {"verdict": "captured", "ku_id": "KU003"}, "scope": {"verdict": "not", "ku_id": null}}},
+  {"input": "HIDDEN RULE R02\n  situation: Quoting work for Pellham County School District buildings.\n  action: Adds ~15% escort allowance and schedules during school breaks.\n  reason: Escorted access during term; 60-day board approval makes change orders impossible.\n  scope: Bus garage excluded.\n\nKNOWLEDGE UNITS:\nKU010: WHEN quoting schools THEN be careful with pricing. WHY: -. SCOPE: -",
+   "output": {"action": {"verdict": "partially", "ku_id": "KU010"}, "reason": {"verdict": "not", "ku_id": null}, "scope": {"verdict": "not", "ku_id": null}}}
+]
